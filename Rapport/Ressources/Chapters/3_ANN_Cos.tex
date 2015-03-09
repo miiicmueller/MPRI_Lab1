@@ -1,0 +1,91 @@
+% Chapter Template
+
+\chapter{ANN to estimate a cosine function} % Main chapter title
+
+\label{Chapitre 4.1} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{ \emph{ANN to estimate a cosine function}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+Le but de cet exercice est de démontrer que l'on peut apprendre "n'importe quoi" à un réseau de neurone. Pour notre essai, nous allons apprendre à notre réseau de neurones la fonction : 
+
+\begin{align*}
+f(x) &= cos(x)
+\end{align*} 
+
+\section{Training data}
+
+Pour commencer nous allons générer une suite de valeur avec le "target" correspondant (jargon matlab). Voilà le code utilisé :
+
+\begin{lstlisting}[frame=single,style=C]  % Start your code-block
+
+x_train = [0:0.1:2*pi] ;
+y_target = cos(x_train);
+\end{lstlisting}
+
+
+On va générer une matrice $x_{train} \in \{0,0.1, ... , 2\pi\}$ et une matrice de résultat $y_{target} = cos(x_{train})$. 
+
+Ces données vont nous permettre d'entrainer notre réseau de neurones.
+\pagebreak
+
+\section{ANN training}
+
+
+Voilà la déclaration de notre réseau de neurones (nous avons fait l'essai avec 3 layers et 10 layers pour comparer les résultats).
+
+\begin{lstlisting}[frame=single,style=C]  % Start your code-block
+
+net = feedforwardnet(3);
+net10 = feedforwardnet(10);
+
+net = train(net,x_train,y_target);
+net10 = train(net10,x_train,y_target);
+\end{lstlisting}
+
+
+
+Voilà la représentation de notre MLP à 3 layers selon l'outil matlab (nous n0avons pas bien compris pour quoi le dernier étage est différent des 3 autres. Probablement pour adapter la sortie) :
+
+\begin{center} 
+\hspace{15cm}
+\includegraphics[width=15cm]{netview.png}
+\end{center}
+\vspace{0.5cm} 
+
+On voit que l'on à qu'une entrée et une sortie, ce qui est logique, car on veut entrer une valeur de "x" et obtenir le cosinus de "x". Le type d'entrainement utilisé est "Levenberg-Marquardt".\\
+
+Voici le diagramme MSE généré par notre outils : 
+
+\begin{center} 
+\hspace{15cm}
+\includegraphics[width=10cm]{mse_cos.png}
+\end{center}
+\vspace{1cm}
+On peut bien voir le travail d'entrainement et le calcul des poids pour minimiser l'erreur. Vérifions maintenant notre système.
+\pagebreak
+
+
+\section{Vérification}
+
+Afin de vérifier si notre système fonctionne, on génère maintenant une nouvelle série des valeur de "x" qui n'appartiennent pas à l'ensemble d'entrainement. Voilà le code :
+
+\begin{lstlisting}[frame=single,style=C]  % Start your code-block
+
+x_validation = [0:0.03:2*pi];
+
+y = net(x_validation);
+y10 = net10(x_validation);
+\end{lstlisting}
+
+Voilà le résultat (en haut la sortie y, et en bas l'erreur par rapport au vrai cos(x)) : 
+\begin{center} 
+\hspace{15cm}
+\includegraphics[width=15cm]{cos_res.png}
+\end{center}
+\vspace{1cm}
+
+
+On voit que l'on à bien pu entrainer notre système avec $x \in [0;2\pi]$ (au-delà le système est faux, l'erreur grandit). On voit que le système à 10 layers est nettement plus performant que le système à 3 layers. Toutefois, le système devient instable pour des valeurs de $x$ approchant $2\pi$.   

@@ -1,0 +1,13 @@
+\BOOKMARK [0][-]{chapter.1}{Introduction}{}% 1
+\BOOKMARK [0][-]{chapter.2}{Biometric System Evaluation}{}% 2
+\BOOKMARK [1][-]{section.2.1}{Scores distribution}{chapter.2}% 3
+\BOOKMARK [1][-]{section.2.2}{Biometric performance curves}{chapter.2}% 4
+\BOOKMARK [0][-]{chapter.3}{ANN to estimate a cosine function}{}% 5
+\BOOKMARK [1][-]{section.3.1}{Training data}{chapter.3}% 6
+\BOOKMARK [1][-]{section.3.2}{ANN training}{chapter.3}% 7
+\BOOKMARK [1][-]{section.3.3}{V\351rification}{chapter.3}% 8
+\BOOKMARK [0][-]{chapter.4}{Train your biometric system}{}% 9
+\BOOKMARK [1][-]{section.4.1}{Feature extraction}{chapter.4}% 10
+\BOOKMARK [1][-]{section.4.2}{ANN training}{chapter.4}% 11
+\BOOKMARK [1][-]{section.4.3}{ANN test}{chapter.4}% 12
+\BOOKMARK [0][-]{chapter.5}{Conclusion}{}% 13
